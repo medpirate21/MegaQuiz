@@ -2101,7 +2101,7 @@
                 for (const file of commonFiles) {
                     try {
                         const encoded = encodeURIComponent(file);
-                        const response = await fetch(`/jsons/${encoded}`);
+                        const response = await fetch(`jsons/${encoded}`);
                         if (response.ok) {
                             const data = await response.json();
                             availableSubjects.push({
@@ -2161,7 +2161,7 @@
                 console.log('Loading subject:', filename);
                 
                 const encoded = encodeURIComponent(filename);
-                const response = await fetch(`/jsons/${encoded}`);
+                const response = await fetch(`jsons/${encoded}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
