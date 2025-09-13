@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disablevtool'></script>
+    <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disableevtool'></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MedOracle - Quiz Arena</title>
@@ -17,12 +17,26 @@
     }
     </script>
     <script type="module">
-        import '@material/web/button/filled-button.js';
-        import '@material/web/button/outlined-button.js';
-        import '@material/web/iconbutton/icon-button.js';
-        import '@material/web/icon/icon.js';
-        import '@material/web/select/outlined-select.js';
-        import '@material/web/select/select-option.js';
+        // Check if components are already loaded to prevent duplicate registration
+        const componentsToLoad = [
+            { path: '@material/web/button/filled-button.js', element: 'md-filled-button' },
+            { path: '@material/web/button/outlined-button.js', element: 'md-outlined-button' },
+            { path: '@material/web/iconbutton/icon-button.js', element: 'md-icon-button' },
+            { path: '@material/web/icon/icon.js', element: 'md-icon' },
+            { path: '@material/web/select/outlined-select.js', element: 'md-outlined-select' },
+            { path: '@material/web/select/select-option.js', element: 'md-select-option' }
+        ];
+
+        // Only load components that haven't been registered yet
+        const loadPromises = componentsToLoad
+            .filter(({ element }) => !customElements.get(element))
+            .map(({ path }) => import(path).catch(err => {
+                console.warn(`Failed to load ${path}:`, err.message);
+            }));
+
+        if (loadPromises.length > 0) {
+            await Promise.all(loadPromises);
+        }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
