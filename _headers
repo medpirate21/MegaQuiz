@@ -1,5 +1,5 @@
 /json/*
-  Access-Control-Allow-Origin: https://medoracle-quiz.pages.dev
+  Access-Control-Allow-Origin: https://medac-quiz.pages.dev
   Content-Type: application/json
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
@@ -9,4 +9,5 @@
 /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
+
   Referrer-Policy: same-origin
